@@ -1,0 +1,43 @@
+Minimum Spanning Tree :-
+
+A tree in which we have n node and n-1 edge and all nodes are reachable from each other
+
+Any tree which has minimum cost (sum) and n node and n-1 edges then it is called minimum spanning tree
+
+
+PRIM'S Algorithm :-
+
+
+    int spanningTree(int V, vector<vector<int>> adj[])
+    {
+        // code here
+        priority_queue<pair<int,pair<int,int>>,vector<pair<int,pair<int,int>>>,greater<pair<int,pair<int,int>>>> pq;
+        pq.push({0,{0,-1}});
+        vector<pair<int,int>> mst;
+        vector<int> vis(V,0);
+        long long sum = 0;
+        while(!pq.empty()){
+            auto it = pq.top();
+            pq.pop();
+            
+            int wt = it.first;
+            int node = it.second.first;
+            int parent = it.second.second;
+            
+            if(vis[node]==1) continue;
+            
+            vis[node] = 1;
+            sum += wt;
+            for(auto c : adj[node]){
+                int w = c[2];
+                int v = c[0];
+                int p = c[1];
+                if(!vis[v]){
+                    pq.push({w,{v,p}});
+                    mst.push_back({v,p});                   
+                }
+            }
+        }
+        // mst vector store the minimum spanning tree
+        return sum;
+    }

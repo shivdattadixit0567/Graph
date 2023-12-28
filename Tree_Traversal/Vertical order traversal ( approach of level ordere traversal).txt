@@ -1,0 +1,46 @@
+Vertical order traversal:- In vertical order traversal line concept is important . when in a line system we go to the left then index is decreases by 1 and when we go to the right index is increases by 1
+
+whenever we goto the left or right in tree level in priority queue is increases by 1
+
+we can store index , level and node in priority queue
+
+
+    vector<vector<int>> verticalTraversal(TreeNode* root) {
+        map<int,map<int,multiset<int>>> m;
+
+        queue<pair<TreeNode*,pair<int,int>>> q;
+
+        q.push({root,{0,0}});
+
+        while(!q.empty()){
+            auto it = q.front();
+            q.pop();
+
+            TreeNode* node = it.first;
+            int idx = it.second.first;
+            int level = it.second.second;
+
+            m[idx][level].insert(node->val);
+
+            if(node->left){
+                q.push({node->left,{idx-1,level+1}});
+            }
+
+            if(node->right){
+                q.push({node->right,{idx+1,level+1}});
+            }
+        }
+
+        vector<vector<int>> ans;
+
+        for(auto &it:m){
+            vector<int> temp;
+            for(auto &it1:it.second){
+                for(auto &it2:it1.second){
+                    temp.push_back(it2);
+                }
+            }
+            ans.push_back(temp);
+        }
+        return ans;
+    }

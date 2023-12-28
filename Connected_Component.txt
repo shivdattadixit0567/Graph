@@ -1,0 +1,52 @@
+Time and Date :- 10:20 11-11-2023
+
+Connected Component
+
+1. we can use both bfs and dfs to find connected component
+2. we have to find no of connected component
+
+
+void dfs(int v , vector<bool> &vis , vector<int> adj[] , vector<int> &component)
+{
+	vis[v] = 1;
+	
+	for(int c:adj[v])
+	{
+		if(!vis[c])
+		{
+			dfs(c,vis,adj);
+		}
+	}
+}
+
+int main()
+{
+	vector<int> adj[n];
+	vector<bool> vis;
+
+	vector<vector<int>> connected_component;
+	
+	for(int i=0;i<n;i++)
+	{
+		if(!vis[i])
+		{
+			vector<int> component
+			dfs(i,vis,adj,component);
+			connected_component.push_back(component);
+		}
+	}
+
+	// print connected component
+	
+	for(auto component:connected_component)
+	{
+		for(int i=0;i<component.size();i++)
+		{
+			cout << component[i] << " ";
+		}
+		cout << endl;
+	}
+	
+	return 0;
+}
+	

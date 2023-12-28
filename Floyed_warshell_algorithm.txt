@@ -1,0 +1,40 @@
+Floyed Warshell Algorithm :- it is a multiple source algorithm and find shortest path between every node
+
+It can detect negative edge cycle
+
+CODE :-
+
+	void shortest_distance(vector<vector<int>>&matrix){
+	    // Code here
+	    int n = matrix.size();
+	    
+	    for(int i = 0; i < n; i++){
+	        for(int j = 0; j < n; j++){
+	            if(matrix[i][j] == -1) matrix[i][j] = 1e9;
+	            if(i == j) matrix[i][j] = 0;
+	        }
+	    }
+	    
+	    for(int k = 0; k < n; k++){
+	        for(int i = 0; i < n; i++){
+	            for(int j = 0; j < n; j++){
+	                matrix[i][j] = min(matrix[i][j],matrix[i][k] + matrix[k][j]);
+	            }
+	        }
+	    }
+	    for(int i = 0; i < n; i++){
+	        for(int j = 0; j < n; j++){
+	            if(matrix[i][j] == 1e9) matrix[i][j] = -1;
+	        }
+	    }
+	}
+
+How to detect cycle :-
+
+	    for(int i = 0; i < n; i++){
+	            if(matrix[i][i] < 0) return 1;
+	    }
+
+application of floyed warshell algorithm :-
+
+https://www.geeksforgeeks.org/problems/city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/1

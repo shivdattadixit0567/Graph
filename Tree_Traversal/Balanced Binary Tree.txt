@@ -1,0 +1,23 @@
+Balanced Binary Tree :-
+
+absolute difference between height of left subtree and right subtree for any node should less than or equal to 1
+
+abs(Height_leftSubTree - Height_rightSubTree) <= 1
+
+
+CODE :- 
+
+    void solve(TreeNode* root , bool &ans, int &h){
+        if(root == NULL || !ans){
+            return;
+        }
+        int l = 0, r = 0;
+
+        solve(root->left,ans,l);
+
+        solve(root->right,ans,r);
+
+        h = max(l,r)+1;
+
+        if(abs(l-r) > 1) ans = 0;
+    }

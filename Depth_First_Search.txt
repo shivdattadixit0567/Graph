@@ -1,0 +1,36 @@
+Time and Date :- 10:11 11-11-2023
+
+Depth First Search :- 
+
+1. This algorithm based on LIFO data structure
+2. This is done by the recursion
+
+3. Space Complexity :- O(n)
+
+4. Time Complexity :- O(n * 2E)
+
+
+CODE :- 
+
+void dfs(int node , vector<bool> &vis , vector<int> adj[])
+{
+	vis[node] = 1;
+	
+	for(auto child:adj[node])
+	{
+		if(!vis[child])
+		{
+			dfs(child,vis,adj);
+		}
+	}
+}
+
+int main()
+{
+	vector<int> adj[];
+	vector<bool> vis;
+	
+	dfs(root , vis , adj);
+	
+	return 0;
+}

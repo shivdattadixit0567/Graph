@@ -1,0 +1,70 @@
+Boundary Traversal :-
+
+only boundary will be traversed in this traversal which leftmost node , leaf node and rightmost node
+
+CODE :-
+
+    void preOrderTraversal(Node* root, vector<int> &ans){
+        if(!root) return;
+        
+        if(root->left || root->right){
+            ans.push_back(root->data);
+        }
+        
+        if(root->left){
+            preOrderTraversal(root->left, ans);
+        }else if(root->right){
+            preOrderTraversal(root->right, ans);
+        }
+    }
+    
+    bool inOrderTraversal(Node* root, vector<int> &ans){
+        if(!root) return 0;
+        
+        int p = inOrderTraversal(root->left, ans);
+        int q = inOrderTraversal(root->right, ans);
+        
+        if(p==0 && q==0){
+            ans.push_back(root->data);
+        }
+        
+        return 1;
+    }
+    
+    void postOrderTraversal(Node* root, vector<int> &ans){
+        if(!root) return;
+
+        if(root->left || root->right){
+            ans.push_back(root->data);
+        }
+        
+        if(root->right){
+            postOrderTraversal(root->right, ans);
+        }else if(root->left){
+            postOrderTraversal(root->left, ans);
+        }
+    }
+    vector <int> boundary(Node *root)
+    {
+        vector<int> ans;
+        if(!root) return ans;
+        ans.push_back(root->data);
+        
+        if(root->left){
+            preOrderTraversal(root->left,ans);
+        }
+        
+        if(root->left || root->right){
+            inOrderTraversal(root,ans);
+        }
+        
+        if(root->right){
+            vector<int> temp;
+            postOrderTraversal(root->right,temp);
+            
+            for(int i = temp.size()-1; i >=0 ;i--){
+                ans.push_back(temp[i]);
+            }
+        }
+        return ans;
+    }

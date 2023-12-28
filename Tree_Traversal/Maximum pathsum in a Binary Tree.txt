@@ -1,0 +1,15 @@
+Maximum pathsum in a Binary Tree :-
+
+    int solve(TreeNode* root, int &sum){
+        if(!root){
+            return 0;
+        }
+
+        int l = solve(root->left, sum);
+
+        int r = solve(root->right, sum);
+
+        sum = max({sum , l + r + root->val, l + root->val, r + root->val, root->val});
+
+        return max({root->val,l + root->val , r + root->val});
+    }

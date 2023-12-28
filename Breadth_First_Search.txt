@@ -1,0 +1,52 @@
+Breadth first search algorigthm
+
+1. it is Fifo based algorithm that uses queue data structure
+2. it uses visited array
+3. it visits the node level wise
+
+4. BFS is also known as level Order Traversal
+
+5. Time Complexity :- O(n * 2E) , where n is no of node and E is the edge
+
+6. Space Complexity :- O(3n) = O(n) , where n is no of node
+
+7. Time and Date :- 10:07 11-11-2023
+
+CODE:-
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+	vector<int> adj[];
+
+	int root;
+	
+	vector<int> bfs;
+	vector<bool> vis;
+
+	queue<int> q;
+
+	q.push(root);
+	
+	while(!q.empty())
+	{
+		int node = q.front();
+		q.pop();
+		
+		bfs.push_back(node);
+
+		for(auto child:adj[node])
+		{
+			if(!vis[child]){
+				q.push(child);
+				vis[child] = true;
+			}
+		}
+	}
+	
+	return 0;
+}
+			

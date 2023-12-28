@@ -1,0 +1,31 @@
+Time and Date :- 16:12 12-11-2023
+
+Algorithm Postorder(tree) :-
+
+Traverse the left subtree, i.e., call Postorder(left->subtree)
+Traverse the right subtree, i.e., call Postorder(right->subtree)
+Visit the root
+
+Uses of Postorder:-
+
+Postorder traversal is used to delete the tree. Please see the question for the deletion of a tree for details. Postorder traversal is also useful to get the postfix expression of an expression tree
+
+
+CODE :- 
+
+void printPostorder(struct Node* node)
+{
+    if (node == NULL)
+        return;
+ 
+    // First recur on left subtree
+    printPostorder(node->left);
+ 
+    // Then recur on right subtree
+    printPostorder(node->right);
+ 
+    // Now deal with the node
+    cout << node->data << " ";
+}
+
+

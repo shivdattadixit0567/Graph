@@ -1,0 +1,30 @@
+bottom view of binary tree :- it is based on line concept (indexing)
+
+    vector <int> bottomView(Node *root) {
+        // Your Code Here
+        
+        queue<pair<Node*,int>> q;
+        q.push({root,0});
+        map<int,int> m;
+        vector<int> ans;
+        while(!q.empty()){
+            auto it = q.front();
+            Node* node = it.first;
+            int index = it.second;
+            q.pop();
+            
+            m[index] = node->data;
+            
+            if(node->left!=NULL){
+                q.push({node->left,index-1});
+            }
+            
+            if(node->right!=NULL){
+                q.push({node->right,index+1});
+            }
+        }
+        for(auto &it: m){
+            ans.push_back(it.second);
+        }
+        return ans;
+    }

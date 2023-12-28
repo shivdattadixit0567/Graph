@@ -1,0 +1,15 @@
+Time and Date :- 10:38 11-11-2023
+
+Flood Fill Algorithm
+
+An image is represented by the 2-D array of integers and each integer is representing the pixel value of
+of the image
+
+given the coordinate (sr,sc) representing the starting pixel of the flood fill and pixel value newColor
+
+To perform the flood fill , consider the starting pixel plus any pixel of same color connected 4-Directionally to the starting pixel
+
+Replace the color of all selected pixel with newColor
+
+
+ANS :- we can use the dfs and bfs both for this algorithm , simply apply any of the algo and get the ans

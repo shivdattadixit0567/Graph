@@ -1,0 +1,55 @@
+Time and Date :- 16:02 11-11-2023
+
+Rotting Oranges a BFS approach
+
+CODE :- 
+
+class Solution {
+public:
+
+    int orangesRotting(vector<vector<int>>& grid) {
+        int n = grid.size();
+        int m = grid[0].size();
+        int ans = 0;
+        vector<vector<int>> vis(n,vector<int>(m,0));
+        queue<pair<pair<int,int>,int>> q;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(grid[i][j]==2&&!vis[i][j]){
+                   q.push({{i,j},0});
+                   vis[i][j]=1;
+                }
+            }
+        }
+        int tm = 0;
+        while(!q.empty()){
+            int r = q.front().first.first;
+            int c = q.front().first.second;
+            int t = q.front().second;
+            tm = max(t,tm);
+            q.pop();
+            for(int x=-1;x<2;x++){
+                for(int y=-1;y<2;y++){
+                    if(abs(x)!=abs(y)){
+                        int nrow = r+x;
+                        int ncol = c+y;
+                        if(nrow>=0&&nrow<n&&ncol>=0&&ncol<m){
+                            if(grid[nrow][ncol]==1&&!vis[nrow][ncol]){
+                                vis[nrow][ncol]=1;
+                                grid[nrow][ncol]=2;
+                                q.push({{nrow,ncol},t+1});
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(grid[i][j]==1) return -1;
+            }
+        }
+        
+        return tm;
+    }
+};

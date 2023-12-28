@@ -1,0 +1,42 @@
+Eventual Safe State using pathvis :-
+
+all state that ends at the terminal node or they are terminal node
+using pathvis array
+
+Code :-
+
+
+    void dfs(int v, vector<int> adj[], vector<int> &vis, vector<int> &pathvis){
+        
+        vis[v] = 1;
+        pathvis[v] = 1;
+        
+        for(int c: adj[v]){
+            if(!vis[c]){
+                dfs(c, adj, vis, pathvis);
+            }
+            
+            if(vis[c] && pathvis[c]==1) return;
+        }
+        
+        pathvis[v] = 2;
+    }
+    vector<int> eventualSafeNodes(int V, vector<int> adj[]) {
+        // code here
+        vector<int> vis(V,0),pathvis(V,0);
+        
+        for(int i = 0; i < V;i++){
+            if(!vis[i]){
+                dfs(i, adj, vis, pathvis);
+            }
+        }
+        
+        vector<int> ans;
+        
+        for(int i=0;i<V;i++){
+            if(pathvis[i]==2) ans.push_back(i);
+        }
+        return ans;
+    }
+
+

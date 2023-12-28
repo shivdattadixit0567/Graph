@@ -1,0 +1,39 @@
+Time and Date :- 16:13 11-11-2023
+
+Detect Cycle in undirected Graph
+
+int main()
+{
+	vector<bool> vis(n);
+	int root;
+	queue<pair<int,int>> q;
+	
+	q.push({root,-1});
+	
+	vis[root] = 1;
+	
+	bool ans = 0;
+
+	while(!q.empty())
+	{
+		int node = q.front().first;
+		int parent = q.front().second;
+		q.pop();
+		vis[node] = 1;
+		
+		for(auto c : adj[node])
+		{
+			if(parent != c)
+			{
+				if(vis[c]) ans = 1;
+				if(!vis[c])
+				{
+					q.push({c,node});
+					vis[c] = 1;
+				}
+			}
+		}
+	}
+	
+	return 0;
+}

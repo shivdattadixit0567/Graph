@@ -1,0 +1,60 @@
+Shortest Path using Topological Sort :-
+
+CODE :-
+
+    void dfs(int v, vector<pair<int,int>> adj[], vector<int> &vis, stack<int> &st){
+        vis[v] = 1;
+        
+        for(auto c:adj[v]){
+            int node = c.first;
+            if(!vis[node]){
+                dfs(node, adj, vis, st);
+            }
+        }
+        
+        st.push(v);
+    }
+
+     vector<int> shortestPath(int N,int M, vector<vector<int>>& edges){
+        // code here
+        vector<pair<int,int>> adj[N];
+        for(int i=0;i<M;i++){
+            int u = edges[i][0];
+            int v = edges[i][1];
+            int wt = edges[i][2];
+            adj[u].push_back({v,wt});
+        }
+        
+        stack<int> st;
+        vector<int> vis(N,0);
+        
+        for(int i = 0; i < N; i++){
+            if(!vis[i]){
+                dfs(i, adj, vis, st);
+            }
+        }
+        
+        // do the distance operation
+        vector<int> dist(N,1000000000);
+        
+        // mark source distance zero
+        dist[0] = 0;
+        
+        while(!st.empty()){
+            int node = st.top();
+            st.pop();
+            
+            for(auto c:adj[node]){
+                int v = c.first;
+                int wt = c.second;
+                
+                if(dist[node]+wt < dist[v]){
+                    dist[v] = dist[node] + wt;
+                }
+            }
+        }
+        for(int i=0;i<N;i++){
+            if(dist[i]==1000000000) dist[i] = -1;
+        }
+        return dist;
+    }

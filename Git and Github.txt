@@ -1,0 +1,29 @@
+Git and Github :-
+
+Git is a version control system
+
+After inistalling the github first time you must be configure the github
+
+git config --global user.name "shivdatta dixit"
+git config --global user.email "shivdattadixit0567@gmail.com"
+git config --list
+
+Deploying A project:-
+
+Clone :- cloning the repo in our system
+
+git clone https://github.com/shivdattadixit0567/Counter.git
+
+After the cloning if file is not modified then nothing happens
+but if modified or if any file is untracked (newly file created) then we have to do these two operation
+
+git status - modified file or untracked file
+
+git add <file name>
+git status - staged (ready to be commited)
+
+git commit -m"message"
+git status - commited
+
+git push origin main (to upload newly created file or modified file)
+git status - file is uploaded to github

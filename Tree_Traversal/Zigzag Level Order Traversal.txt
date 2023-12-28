@@ -1,0 +1,39 @@
+Zigzag Level Order Traversal :- it is also called spiral level order traversal
+
+    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+        // zigzag or spiral level order traversal
+
+        queue<TreeNode*> p;
+        vector<vector<int>> ans;
+        bool ok = 1;
+        p.push(root);
+
+        while(!p.empty()){
+            queue<TreeNode*> q = p;
+
+            vector<int> temp;
+            
+            while(!q.empty()){
+                TreeNode* node = q.front();
+                p.pop();
+                q.pop();
+                if(node){
+                    temp.push_back(node->val);
+                    p.push(node->left);
+                    p.push(node->right);
+                }
+            }
+
+            if(!ok && temp.size()){
+                reverse(temp.begin(),temp.end());
+                ans.push_back(temp);
+                ok = 1;
+            }else if(temp.size()){
+                ans.push_back(temp);
+                ok = 0;               
+            }
+        }
+
+        return ans;
+    }
+

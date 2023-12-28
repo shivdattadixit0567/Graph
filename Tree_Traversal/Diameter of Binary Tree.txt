@@ -1,0 +1,12 @@
+Diameter of Binary Tree :- it does'n need to pass from root node
+
+    int maxheight(TreeNode* root , int &d){
+        if(root==NULL) return 0;
+
+        int l = maxheight(root->left,d);
+        int r = maxheight(root->right,d);
+
+        d = max(d,l+r);
+
+        return 1+max(l,r);
+    }

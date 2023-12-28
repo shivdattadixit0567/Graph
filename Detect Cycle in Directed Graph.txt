@@ -1,0 +1,24 @@
+Time and Date :- 15:48 13-11-2023
+
+Detect Cycle in Directed Graph :- 
+
+CODE :- 
+
+
+    bool dfs(int v, vector<int> adj[], bool vis[], bool pathvis[])
+    {
+        vis[v] = 1;
+        pathvis[v] = 1;
+        
+        
+        for(auto c : adj[v]){
+            if(!vis[c]){
+                dfs(c, adj, vis, pathvis);
+            }
+            if(vis[c] && pathvis[c]) return true;
+        }
+        
+        pathvis[v] = 0;
+        
+        return false;
+    }

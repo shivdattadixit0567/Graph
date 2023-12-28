@@ -1,0 +1,30 @@
+Time and Date :- 15:37 12-11-2023
+
+Algorithm Inorder(tree):-
+
+Traverse the left subtree, i.e., call Inorder(left->subtree)
+Visit the root.
+Traverse the right subtree, i.e., call Inorder(right->subtree)
+
+
+Uses of Inorder Traversal:-
+
+In the case of binary search trees (BST), Inorder traversal gives nodes in non-decreasing order. To get nodes of BST in non-increasing order, a variation of Inorder traversal where Inorder traversal is reversed can be used.
+
+
+CODE :- 
+
+void printInorder(struct Node* node)
+{
+    if (node == NULL)
+        return;
+ 
+    // First recur on left child
+    printInorder(node->left);
+ 
+    // Then print the data of node
+    cout << node->data << " ";
+ 
+    // Now recur on right child
+    printInorder(node->right);
+}

@@ -1,0 +1,55 @@
+Segment Tree Templates
+
+
+class SegmentTree{
+    public:
+    vector<ll> tree;
+    int n;
+    SegmentTree(vector<ll>& v){
+        n=v.size();
+        tree.assign(4*n,0);
+        buildTree(1,0,n-1,v);
+    }
+    void buildTree(int node,int l,int r,vector<ll>& v){
+        if(l>r) return;
+        if(l==r){
+            tree[node]=v[l];
+            return;
+        }
+        int mid=(l+r)/2;
+        buildTree(node*2,l,mid,v);
+        buildTree(node*2+1,mid+1,r,v);
+        combine(node);
+    }
+    int getValue(int l,int r){
+        return _getVal(l,r,0,n-1,1);
+    }
+    void combine(int node){
+        tree[node]=tree[node*2]+tree[node*2+1];
+    }
+    ll _getVal(int l,int r,int tree_left,int tree_right,int node){
+        if(tree_right<tree_left)    return 0;
+        if(tree_left>=l && tree_right<=r){   // the entire substree is a part of the thing being queried
+            return tree[node];
+        }
+        if(tree_left>r || tree_right<l ) return 0;
+        if(tree_left==tree_right)   return tree[node];
+        int mid=(tree_left+tree_right)/2;
+        return _getVal(l,r,tree_left,mid,node*2)+_getVal(l,r,mid+1,tree_right,node*2+1);
+        
+    }
+    void update(int idx,int newVal){
+        _update(idx,newVal,0,n-1,1);
+    }
+    void _update(int idx,int newVal,int tree_left,int tree_right,int node){
+        if(tree_left>idx || tree_right<idx) return;
+        if(tree_left==tree_right){
+            tree[node]=newVal;
+            return;
+        }
+        int mid=(tree_left+tree_right)/2;
+        _update(idx,newVal,tree_left,mid,node*2);
+        _update(idx,newVal,mid+1,tree_right,node*2+1);
+        combine(node);
+    }
+};

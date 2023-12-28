@@ -1,0 +1,30 @@
+Time and Date :- 15:56 12-11-2023
+
+
+Algorithm Preorder(tree) :- 
+
+Visit the root.
+Traverse the left subtree, i.e., call Preorder(left->subtree)
+Traverse the right subtree, i.e., call Preorder(right->subtree) 
+
+
+Uses of Preorder:-
+
+Preorder traversal is used to create a copy of the tree. Preorder traversal is also used to get prefix expressions on an expression tree.
+
+CODE :-
+
+void printPreorder(struct Node* node)
+{
+    if (node == NULL)
+        return;
+ 
+    // First print data of node
+    cout << node->data << " ";
+ 
+    // Then recur on left subtree
+    printPreorder(node->left);
+ 
+    // Now recur on right subtree
+    printPreorder(node->right);
+}

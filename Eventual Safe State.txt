@@ -1,0 +1,49 @@
+Time and Date :- 17:30 13-11-2023
+
+Eventual Safe State :-
+
+CODE :- 
+
+
+    bool dfs(int v, vector<int> adj[], vector<bool> &vis, vector<bool> &pathvis, vector<bool> &check)
+    {
+        // here we visiting the node
+        vis[v] = 1;
+        // here we mark the node which is in same path
+        pathvis[v] = 1;
+        // initially we mark the node as not a safe state
+        check[v] = 0;
+        
+        for(auto c : adj[v]){
+            if(!vis[c]){
+                dfs(c, adj, vis, pathvis,check);
+            }
+            if(vis[c] && pathvis[c]) return true;
+        }
+        // after all recursive call if dfs is here then cycle is not present
+        check[v] = 1;
+        // after recursive call we mark pathvis as 0
+        pathvis[v] = 0;
+        return false;
+    }
+
+  public:
+
+    vector<int> eventualSafeNodes(int V, vector<int> adj[]) {
+        // code here
+        vector<bool> vis(V,0),pathvis(V,0),check(V,0);
+        
+        vector<int> safeNode;
+
+        
+        for(int i=0;i < V;i++){
+            if(!vis[i]){
+                dfs(i, adj, vis, pathvis,check);
+            }
+        }
+        
+        for(int i = 0; i < V; i++){
+            if(check[i]==1) safeNode.push_back(i);
+        }
+        return safeNode;
+    }
